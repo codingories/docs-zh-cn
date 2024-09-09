@@ -227,6 +227,15 @@ export default {
 <div class="composition-api">
 
 ```vue
+<template>
+  <div>
+    <p>First Name: {{ firstName }}</p>
+    <p>Last Name: {{ lastName }}</p>
+    <p>Full Name: {{ fullName }}</p>
+    <button @click="fullName = 'Mike Shi'">Change Name</button>
+  </div>
+</template>
+
 <script setup>
 import { ref, computed } from 'vue'
 
@@ -240,8 +249,9 @@ const fullName = computed({
   },
   // setter
   set(newValue) {
-    // 注意：我们这里使用的是解构赋值语法
-    [firstName.value, lastName.value] = newValue.split(' ')
+    const [newFirstName, newLastName] = newValue.split(' ');
+    firstName.value = newFirstName;
+    lastName.value = newLastName;
   }
 })
 </script>
